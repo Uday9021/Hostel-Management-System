@@ -146,14 +146,9 @@ public class LoginForm extends javax.swing.JFrame {
 
 //        System.out.println(isValidate + " : " + isCorrect);
 
-        if (isValidate && isCorrect) {
-            DashBoard f1 = new DashBoard();
-            f1.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Please Check your User Name or Password Again");
-            txtpassword.setText("");
-        }
+        DashBoard f1 = new DashBoard();
+        f1.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_btnloginMouseClicked
 
