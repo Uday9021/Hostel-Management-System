@@ -40,12 +40,13 @@ Open `http://localhost:5000`. The app uses demo data held in memory.
 
 ## CI/CD setup
 
-1. Push this repository to GitHub and create a public Docker Hub repository named `hostel-cicd`.
-2. Edit `IMAGE_REPO` near the top of `Jenkinsfile`, replacing `REPLACE_WITH_DOCKERHUB_USERNAME` with your Docker Hub username.
-3. In Jenkins, add a Docker Hub username and access token credential with ID `dockerhub-creds`.
-4. Create a Pipeline job using **Pipeline script from SCM**, point it at this GitHub repository and branch, and set the script path to `Jenkinsfile`.
-5. Ensure the Jenkins account can run Docker and `kubectl` against the Minikube cluster.
-6. Run the job. It checks out the repository, builds the test target, builds and pushes a commit-tagged image, applies the manifests, and waits for the rollout.
+1. Keep this repository in GitHub and create a public Docker Hub repository named `hostel-cicd` under `uday9021`.
+2. The `Jenkinsfile` is configured to publish to `uday9021/hostel-cicd`.
+3. In Jenkins, store the Docker Hub username and access token as a username/password credential with ID `dockerhub-creds`. The GitHub repository is public, so the Pipeline SCM credential can be left as `- none -`.
+4. Create a Pipeline job using **Pipeline script from SCM** with repository URL `https://github.com/Uday9021/Hostel-Management-System.git`, branch `*/master`, and script path `Jenkinsfile`.
+5. Jenkins runs on an Amazon Linux 2023 EC2 instance. Ensure Git, Docker, `kubectl`, and Minikube are installed and available to the Jenkins account, and that Jenkins can use Docker and the Minikube cluster.
+6. Run the job. It checks out the repository, runs the six unit tests in the Docker test target, builds a Docker image tagged with the Git commit, pushes that image to Docker Hub, applies the Kubernetes manifests, and waits for the rollout.
+7. For the source-change demonstration, the dashboard heading was changed from `Hostel rooms — CI/CD update` to `Hostel rooms — CI/CD update v2`. The change was pushed to `master` and redeployed through Jenkins.
 
 The Docker Hub repository must be public for the supplied Kubernetes manifest to pull the image without an image-pull secret. If it is private, configure a Kubernetes image-pull secret and reference it in the Deployment.
 
