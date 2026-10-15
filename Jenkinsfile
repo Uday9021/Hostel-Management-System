@@ -4,19 +4,12 @@ pipeline {
     environment {
         // Replace with your public Docker Hub repository before the first build.
         IMAGE_REPO = 'uday9021/hostel-cicd'
-        IMAGE_TAG = ''
     }
 
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
-                script {
-                    env.IMAGE_TAG = sh(
-                        script: 'git rev-parse --short=12 HEAD',
-                        returnStdout: true
-                    ).trim()
-                }
             }
         }
 
@@ -28,7 +21,10 @@ pipeline {
 
         stage('Build Docker image') {
             steps {
-                sh 'docker build --tag ${IMAGE_REPO}:${IMAGE_TAG} --tag ${IMAGE_REPO}:latest .'
+                sh '''
+                    IMAGE_TAG=$(git rev-parse --short=12 HEAD)
+                    docker build --tag "$IMAGE_REPO:$IMAGE_TAG" --tag "$IMAGE_REPO:latest" .
+                '''
             }
         }
 
@@ -41,6 +37,7 @@ pipeline {
                 )]) {
                     sh '''
                         set +x
+                        IMAGE_TAG=$(git rev-parse --short=12 HEAD)
                         printf '%s' "$DOCKERHUB_TOKEN" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
                         docker push "$IMAGE_REPO:$IMAGE_TAG"
                         docker push "$IMAGE_REPO:latest"
@@ -54,6 +51,7 @@ pipeline {
             steps {
                 sh '''
                     set -eu
+                    IMAGE_TAG=$(git rev-parse --short=12 HEAD)
                     kubectl apply -f k8s/service.yaml
                     sed "s|REPLACE_WITH_DOCKERHUB_USERNAME/hostel-cicd:latest|${IMAGE_REPO}:${IMAGE_TAG}|" k8s/deployment.yaml | kubectl apply -f -
                     kubectl rollout status deployment/hostel-web --timeout=180s
