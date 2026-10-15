@@ -21,7 +21,7 @@ public class MonthlyPaymentDAOImpl implements MonthlyPaymentDAO{
 
     @Override
     public boolean add(MonthlyPayment t) throws ClassNotFoundException, SQLException {
-        return CrudUtill.executeUpdate("INSERT INTO monthly_Payment VALUES(?,?,?,?,?)", t.getMpid(),t.getGID(),t.getAmount(),t.getPayment_date(),t.getNextPaymentDate());
+        return CrudUtill.executeUpdate("INSERT INTO monthly_payment VALUES(?,?,?,?,?)", t.getMpid(),t.getGID(),t.getAmount(),t.getPayment_date(),t.getNextPaymentDate());
     }
 
     @Override
@@ -36,7 +36,7 @@ public class MonthlyPaymentDAOImpl implements MonthlyPaymentDAO{
 
     @Override
     public MonthlyPayment search(String t) throws ClassNotFoundException, SQLException {
-        ResultSet rst = CrudUtill.executeQuery("SELECT * FROM monthly_Payment WHERE GID=?", t);
+        ResultSet rst = CrudUtill.executeQuery("SELECT * FROM monthly_payment WHERE GID=?", t);
         MonthlyPayment payment=null;
         if(rst.next()){
             payment=new MonthlyPayment(rst.getString(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(5)); 

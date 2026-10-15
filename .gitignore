@@ -2,6 +2,10 @@
 __pycache__/
 *.py[cod]
 .venv/
+hostel-web/instance/
+*.db
+*.db-shm
+*.db-wal
 
 # Local environment and editor files
 .env

@@ -676,7 +676,7 @@ public class GuestRegistrationForm extends javax.swing.JFrame {
 
     private void setIdAuto() {
         try {
-            String newId = IdGenerator.getNewId("Guest", "GID", "G");
+            String newId = IdGenerator.getNewId("guest", "GID", "G");
             txtgid.setText(newId);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GuestRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);

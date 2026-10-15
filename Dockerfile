@@ -17,7 +17,10 @@ COPY hostel-web/tests/ ./tests/
 RUN python -m unittest discover -s tests -v
 
 FROM base AS runtime
-RUN groupadd --system app && useradd --system --gid app --no-create-home app
+RUN groupadd --gid 10001 app \
+    && useradd --uid 10001 --gid app --no-create-home --shell /usr/sbin/nologin app \
+    && mkdir -p /app/instance /data \
+    && chown -R app:app /app/instance /data
 USER app
 
 EXPOSE 5000

@@ -54,7 +54,7 @@ public class LoginDAOImpl implements LoginDAO{
     public  Login systemUserLogin(String name, String password) throws Exception {
         
         Login type = null;
-        ResultSet rst = CrudUtill.executeQuery("select * from User where UserName=? && password=?", name,password);
+        ResultSet rst = CrudUtill.executeQuery("select * from user_account where UserName=? AND password=?", name,password);
         while (rst.next()) {
             System.out.println(rst.getString(1));
             type = new Login(rst.getString(1), rst.getString(2));

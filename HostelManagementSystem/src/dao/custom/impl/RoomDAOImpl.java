@@ -22,23 +22,23 @@ public class RoomDAOImpl implements RoomDAO{
 
     @Override
     public boolean add(Room t) throws ClassNotFoundException, SQLException {
-        return CrudUtill.executeUpdate("insert into Room values(?,?,?,?,?,?,?,?)", t.getRoom_no(),t.getTID(),t.getHID(),t.getNo_of_beds(),t.getFloor_number(),t.getCurrent_Borders_count(),t.getWidth(),t.getLength());
+        return CrudUtill.executeUpdate("insert into room values(?,?,?,?,?,?,?,?)", t.getRoom_no(),t.getTID(),t.getHID(),t.getNo_of_beds(),t.getFloor_number(),t.getCurrent_Borders_count(),t.getWidth(),t.getLength());
         
     }
 
     @Override
     public boolean update(Room t) throws ClassNotFoundException, SQLException {
-        return CrudUtill.executeUpdate("update Room set TID=?,HID=?, No_of_beds=?,Floor_number=?,Current_Borders_count=?, Width=?,Length=? where Room_no=?", t.getTID(),t.getHID(),t.getNo_of_beds(),t.getFloor_number(),t.getCurrent_Borders_count(),t.getWidth(),t.getLength(),t.getRoom_no());
+        return CrudUtill.executeUpdate("update room set TID=?,HID=?, No_of_beds=?,Floor_number=?,Current_Borders_count=?, Width=?,Length=? where Room_no=?", t.getTID(),t.getHID(),t.getNo_of_beds(),t.getFloor_number(),t.getCurrent_Borders_count(),t.getWidth(),t.getLength(),t.getRoom_no());
     }
 
     @Override
     public boolean delete(String t) throws ClassNotFoundException, SQLException {
-        return CrudUtill.executeUpdate("delete from Room where Room_no=?",t);
+        return CrudUtill.executeUpdate("delete from room where Room_no=?",t);
     }
 
     @Override
     public Room search(String t) throws ClassNotFoundException, SQLException {
-        ResultSet rst = CrudUtill.executeQuery("select * from Room where Room_no=?",t);
+        ResultSet rst = CrudUtill.executeQuery("select * from room where Room_no=?",t);
         Room room=null;
         if(rst.next()){
             room =new Room(rst.getString(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(5),rst.getString(6),rst.getString(7),rst.getString(8));
@@ -48,7 +48,7 @@ public class RoomDAOImpl implements RoomDAO{
 
     @Override
     public ArrayList<Room> getAll() throws ClassNotFoundException, SQLException {
-        ResultSet rst = CrudUtill.executeQuery("select * from Room");
+        ResultSet rst = CrudUtill.executeQuery("select * from room");
         ArrayList<Room> allRooms =new ArrayList<>();
         while(rst.next()){
             allRooms.add(new Room(rst.getString(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(5),rst.getString(6),rst.getString(7),rst.getString(8)));

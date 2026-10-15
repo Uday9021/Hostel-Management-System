@@ -50,10 +50,10 @@ public class QueryDAOImpl implements QueryDAO {
 
     @Override
     public ArrayList<CustomEntity> getAllDetails(String Name, String Gender) throws ClassNotFoundException, SQLException {
-         ResultSet rst = CrudUtill.executeQuery("select  hostel.HID,room.Room_no,room.Current_Borders_count,"
+         ResultSet rst = CrudUtill.executeQuery("select hostel.HID,room.Room_no,room.Current_Borders_count,"
                 + "room.No_of_beds,room.Floor_number,room.Width,"
                 + "room.Length "
-                + "from hostel hostel,Room Room,Type Type "
+                + "from hostel hostel,room room,type type "
                 + "where hostel.HID = room.HID AND room.TID = type.TID AND type.Name = ?"
                 + "AND hostel.Gender_of_residence=? AND room.Current_Borders_count < room.No_of_beds", Name, Gender);
         ArrayList<CustomEntity> allDetails =new  ArrayList<>();

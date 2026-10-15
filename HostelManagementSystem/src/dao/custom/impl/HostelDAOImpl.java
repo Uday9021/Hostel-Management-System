@@ -7,7 +7,6 @@ package dao.custom.impl;
 
 import dao.CrudUtill;
 import dao.custom.HostelDAO;
-import dto.Available;
 import entity.Hostel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +20,7 @@ public class HostelDAOImpl implements HostelDAO {
 
     @Override
     public boolean add(Hostel hostel) throws ClassNotFoundException, SQLException {
-        return CrudUtill.executeUpdate("insert into Hostel values(?,?,?,?,?)", hostel.getHID(), hostel.getNo_of_Rooms(), hostel.getGender_of_residence(), hostel.getPhone_Number(), hostel.getAddress());
+        return CrudUtill.executeUpdate("insert into hostel values(?,?,?,?,?)", hostel.getHID(), hostel.getNo_of_Rooms(), hostel.getGender_of_residence(), hostel.getPhone_Number(), hostel.getAddress());
 
     }
 
@@ -48,7 +47,7 @@ public class HostelDAOImpl implements HostelDAO {
 
     @Override
     public ArrayList<Hostel> getAll() throws ClassNotFoundException, SQLException {
-        ResultSet rst = CrudUtill.executeQuery("select * from Hostel");
+        ResultSet rst = CrudUtill.executeQuery("select * from hostel");
         ArrayList<Hostel> allHostels = new ArrayList<>();
         while (rst.next()) {
             allHostels.add(new Hostel(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5)));
@@ -59,13 +58,14 @@ public class HostelDAOImpl implements HostelDAO {
 
     @Override
     public ArrayList<Hostel> getAllAvailableHostels() throws ClassNotFoundException, SQLException {
-        ResultSet rst = CrudUtill.executeQuery("select h.HID, Gender_of_residence,Address,Room_no, No_of_beds,Current_Borders_count,Price,Name \n"
-                + "from hostel h,Room r,Type t where h.HID = r.HID AND r.TID =t.TID AND r.Current_Borders_count<r.No_of_beds;");
-        ArrayList<Available> allAvailableHostels = new ArrayList<>();
+        ResultSet rst = CrudUtill.executeQuery("select distinct h.* from hostel h "
+                + "join room r on h.HID = r.HID "
+                + "where r.Current_Borders_count < r.No_of_beds");
+        ArrayList<Hostel> allAvailableHostels = new ArrayList<>();
         while (rst.next()) {
-            allAvailableHostels.add(new Available(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getString(6), rst.getString(7), rst.getString(8)));
+            allAvailableHostels.add(new Hostel(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5)));
         }
-        return null;
+        return allAvailableHostels;
     }
 
 }

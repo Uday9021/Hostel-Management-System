@@ -33,7 +33,7 @@ public class HostelBOImpl implements HostelBO {
 
     @Override
     public boolean updateHostel(HostelDTO hostel) throws ClassNotFoundException, SQLException {
-        return dao.update(new Hostel(hostel.getHID(), hostel.getNo_of_Rooms(), hostel.getGender_of_residence(), hostel.getAddress(),hostel.getPhone_Number()));
+        return dao.update(new Hostel(hostel.getHID(), hostel.getNo_of_Rooms(), hostel.getGender_of_residence(), hostel.getPhone_Number(), hostel.getAddress()));
     }
 
     @Override

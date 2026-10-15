@@ -367,7 +367,7 @@ public class FacilityForm extends javax.swing.JFrame {
     }
      private void setIDAuto() {
         try {
-            String newId = IdGenerator.getNewId("Facility", "FID", "F");
+            String newId = IdGenerator.getNewId("facility", "FID", "F");
             txtFaciID.setText(newId);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GuestRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);

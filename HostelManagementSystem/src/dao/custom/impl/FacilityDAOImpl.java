@@ -20,7 +20,7 @@ public class FacilityDAOImpl implements FacilityDAO{
                      
     @Override
     public boolean add(Facility t) throws ClassNotFoundException, SQLException {
-        return CrudUtill.executeUpdate("insert into Facility values(?,?)", t.getFID(),t.getName());
+        return CrudUtill.executeUpdate("insert into facility values(?,?)", t.getFID(),t.getName());
     }
 
     @Override

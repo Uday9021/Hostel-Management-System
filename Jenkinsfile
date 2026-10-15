@@ -52,6 +52,7 @@ pipeline {
                 sh '''
                     set -eu
                     IMAGE_TAG=$(git rev-parse --short=12 HEAD)
+                    kubectl apply -f k8s/persistent-volume-claim.yaml
                     kubectl apply -f k8s/service.yaml
                     sed "s|REPLACE_WITH_DOCKERHUB_USERNAME/hostel-cicd:latest|${IMAGE_REPO}:${IMAGE_TAG}|" k8s/deployment.yaml | kubectl apply -f -
                     kubectl rollout status deployment/hostel-web --timeout=180s

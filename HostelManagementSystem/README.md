@@ -1,146 +1,22 @@
-\# 🏨 Hostel Management System
+# Java Swing Hostel Management System
 
+This is the original NetBeans desktop application. It uses the MySQL schema in `database/schema.sql` and expects a MySQL server to be running separately.
 
+The NetBeans project uses the bundled MySQL Connector/J 8.4.0 driver.
 
-A Java-based \*\*Hostel Management System\*\* developed using \*\*Apache NetBeans\*\* to simplify and automate hostel administration tasks such as student management, room allocation, reservations, payments, and user management.
+## Database setup
 
+1. Import `database/schema.sql` into MySQL.
+2. Create a local application account and first login. Replace the example values with private passwords; do not commit them:
 
+   ```sql
+   CREATE USER 'hostel_app'@'localhost' IDENTIFIED BY 'REPLACE_WITH_A_PRIVATE_DB_PASSWORD';
+   GRANT SELECT, INSERT, UPDATE, DELETE ON nugasewana.* TO 'hostel_app'@'localhost';
+   INSERT INTO nugasewana.user_account (UserName, password)
+       VALUES ('admin', 'REPLACE_WITH_A_PRIVATE_LOGIN_PASSWORD');
+   ```
 
-\## 📌 Project Overview
+3. Set `HOSTEL_DB_URL`, `HOSTEL_DB_USER`, and `HOSTEL_DB_PASSWORD` in the environment used to launch NetBeans. The default URL is `jdbc:mysql://127.0.0.1:3306/nugasewana` with MySQL connection options; the default username is `hostel_app`. A password must be supplied.
+4. Open this folder as a NetBeans project and run it. Sign in with the account created in step 2.
 
-
-
-The Hostel Management System helps hostel administrators manage daily operations efficiently. It reduces manual paperwork by providing a digital platform to maintain student records, hostel details, room availability, reservations, and payment information.
-
-
-
-\## ✨ Features
-
-
-
-\- 🔐 User Login \& Authentication
-
-\- 👨‍🎓 Student Registration and Management
-
-\- 🏢 Hostel Management
-
-\- 🚪 Room Allocation and Management
-
-\- 📅 Reservation Management
-
-\- 💳 Payment Management
-
-\- 👥 User Management
-
-
-
-\## 🛠️ Technologies Used
-
-
-
-\- \*\*Programming Language:\*\* Java
-
-\- \*\*GUI Framework:\*\* Java Swing
-
-\- \*\*Database:\*\* MySQL
-
-\- \*\*Connectivity:\*\* JDBC
-
-\- \*\*IDE:\*\* Apache NetBeans
-
-
-
-\## 📂 Project Structure
-
-
-
-HostelManagementSystem/
-
-│
-
-├── src/ # Java source files
-
-├── lib/ # External libraries
-
-├── dist/ # Build output files
-
-├── build/ # Compiled files
-
-├── nbproject/ # NetBeans project configuration
-
-└── README.md # Project documentation
-
-
-
-
-
-\## ⚙️ Database Setup
-
-
-
-1\. Install MySQL Server.
-
-2\. Create the required database.
-
-3\. Import project database tables.
-
-4\. Configure JDBC connection details.
-
-5\. Run the application.
-
-
-
-\## 🚀 How to Run
-
-
-
-1\. Clone the repository:
-
-&#x20;  git clone https://github.com/Uday9021/Hostel-Management-System.git
-
-
-
-2\. Open the project in \*\*Apache NetBeans\*\*.
-
-3\. Configure the MySQL database connection.
-
-4\. Run the project.
-
-
-
-
-
-\## 🔮 Future Enhancements
-
-
-
-\- Online fee payment integration
-
-\- Email/SMS notification system
-
-\- Advanced search and filtering
-
-\- Hostel occupancy reports
-
-\- Admin dashboard and analytics
-
-
-
-\## 👨‍💻 Developer
-
-
-
-\*\*Uday Sonawane\*\*  
-
-B.Tech Computer Science Engineering
-
-
-
-\## 📄 License
-
-
-
-This project is developed for educational purposes only.
-
-
-
+The connection settings can also be supplied as Java system properties: `hostel.db.url`, `hostel.db.user`, and `hostel.db.password`.

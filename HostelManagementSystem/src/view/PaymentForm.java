@@ -535,7 +535,7 @@ that's it
 
     private void setAutoID() {
         try {
-            String newId = IdGenerator.getNewId("key_Money", "KID", "K");
+            String newId = IdGenerator.getNewId("key_money", "KID", "K");
             txtkId1.setText(newId);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GuestRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -561,7 +561,7 @@ that's it
 
     private void setAutoMPID() {
         try {
-            String newId = IdGenerator.getNewId("monthly_Payment", "mpid", "P");
+            String newId = IdGenerator.getNewId("monthly_payment", "mpid", "P");
             txtpaymentId.setText(newId);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GuestRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);

@@ -653,7 +653,7 @@ public class RoomForm extends javax.swing.JFrame {
 
     private void setIdAuto() {
         try {
-            String newId = IdGenerator.getNewId("Room", "Room_no", "R");
+            String newId = IdGenerator.getNewId("room", "Room_no", "R");
             txtRoomNumber.setText(newId);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GuestRegistrationForm.class.getName()).log(Level.SEVERE, null, ex);

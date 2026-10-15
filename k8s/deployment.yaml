@@ -14,10 +14,18 @@ spec:
       labels:
         app: hostel-web
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
       containers:
         - name: hostel-web
           image: REPLACE_WITH_DOCKERHUB_USERNAME/hostel-cicd:latest
           imagePullPolicy: Always
+          env:
+            - name: HOSTEL_DATABASE
+              value: /data/hostel.db
           ports:
             - name: http
               containerPort: 5000
@@ -41,3 +49,10 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
+          volumeMounts:
+            - name: hostel-data
+              mountPath: /data
+      volumes:
+        - name: hostel-data
+          persistentVolumeClaim:
+            claimName: hostel-web-data

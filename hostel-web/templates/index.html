@@ -22,7 +22,7 @@
         <div>
           <p class="eyebrow">HOSTEL ADMINISTRATION</p>
           <h1>Hostel rooms — CI/CD update v2</h1>
-          <p class="intro-copy">A quick view of room capacity and current occupancy.</p>
+          <p class="intro-copy">Manage hostel rooms, update occupancy, and track available beds.</p>
         </div>
         <div class="date-chip"><span class="date-icon" aria-hidden="true">▦</span> Room overview</div>
       </section>
@@ -62,14 +62,15 @@
           <div class="table-wrap">
             <table>
               <thead>
-                <tr><th>Room</th><th>Occupancy</th><th>Availability</th></tr>
+                <tr><th>Room</th><th>Occupancy</th><th>Availability</th><th>Manage</th></tr>
               </thead>
               <tbody id="room-list">
-                <tr><td class="loading" colspan="3">Loading room data…</td></tr>
+                <tr><td class="loading" colspan="4">Loading room data…</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="data-note"><span aria-hidden="true">ⓘ</span> Demo records reset when the application restarts.</p>
+          <p class="directory-message" id="directory-message" role="status" aria-live="polite"></p>
+          <p class="data-note"><span aria-hidden="true">ⓘ</span> Room records are saved in the application database.</p>
         </article>
 
         <aside class="panel add-panel">

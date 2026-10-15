@@ -21,7 +21,7 @@ public class KeyMoneyDAOImpl implements KeyMoneyDAO{
 
     @Override
     public boolean add(KeyMoney t) throws ClassNotFoundException, SQLException {
-        return CrudUtill.executeUpdate("INSERT INTO key_Money VALUES(?,?,?,?,?)", t.getKID(),t.getGID(),t.getPaidDate(),t.getAmount(),t.getPay_BackDate());
+        return CrudUtill.executeUpdate("INSERT INTO key_money VALUES(?,?,?,?,?)", t.getKID(),t.getGID(),t.getPaidDate(),t.getAmount(),t.getPay_BackDate());
     }
 
     @Override
@@ -31,12 +31,12 @@ public class KeyMoneyDAOImpl implements KeyMoneyDAO{
 
     @Override
     public boolean delete(String t) throws ClassNotFoundException, SQLException {
-        return CrudUtill.executeUpdate("delete from Key_Money where GID=?", t);
+        return CrudUtill.executeUpdate("delete from key_money where GID=?", t);
     }
 
     @Override
     public KeyMoney search(String t) throws ClassNotFoundException, SQLException {
-        ResultSet rst = CrudUtill.executeQuery("SELECT * FROM key_Money WHERE GID =?",t);
+        ResultSet rst = CrudUtill.executeQuery("SELECT * FROM key_money WHERE GID =?",t);
         KeyMoney payments =null;
         if(rst.next()){
             payments =new KeyMoney(rst.getString(1),rst.getString(2),rst.getString(3),rst.getString(4),rst.getString(5));
