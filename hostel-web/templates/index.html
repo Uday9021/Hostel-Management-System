@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#102b3f">
+    <title>Hostel rooms | Hostel Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Hostel Management home">
+        <span class="brand-mark" aria-hidden="true">H</span>
+        <span>Hostel<span class="brand-light">Management</span></span>
+      </a>
+      <span class="environment"><span class="status-dot"></span> Live demo</span>
+    </header>
+
+    <main class="page-shell">
+      <section class="intro">
+        <div>
+          <p class="eyebrow">HOSTEL ADMINISTRATION</p>
+          <h1>Hostel rooms</h1>
+          <p class="intro-copy">A quick view of room capacity and current occupancy.</p>
+        </div>
+        <div class="date-chip"><span class="date-icon" aria-hidden="true">▦</span> Room overview</div>
+      </section>
+
+      <section class="summary-grid" aria-label="Room summary">
+        <article class="summary-card">
+          <div class="summary-label">Total rooms <span class="card-icon blue" aria-hidden="true">▤</span></div>
+          <p class="summary-value" id="room-count">—</p>
+          <p class="summary-note">Available for allocation</p>
+        </article>
+        <article class="summary-card">
+          <div class="summary-label">Total beds <span class="card-icon violet" aria-hidden="true">▦</span></div>
+          <p class="summary-value" id="capacity-count">—</p>
+          <p class="summary-note">Across all listed rooms</p>
+        </article>
+        <article class="summary-card">
+          <div class="summary-label">Occupied <span class="card-icon orange" aria-hidden="true">●</span></div>
+          <p class="summary-value" id="occupied-count">—</p>
+          <p class="summary-note">Beds currently in use</p>
+        </article>
+        <article class="summary-card available-card">
+          <div class="summary-label">Available beds <span class="card-icon green" aria-hidden="true">✓</span></div>
+          <p class="summary-value" id="available-count">—</p>
+          <p class="summary-note">Ready for new residents</p>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel rooms-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Room directory</h2>
+              <p>View occupancy by room</p>
+            </div>
+            <span class="count-badge" id="directory-count">0 rooms</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Room</th><th>Occupancy</th><th>Availability</th></tr>
+              </thead>
+              <tbody id="room-list">
+                <tr><td class="loading" colspan="3">Loading room data…</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="data-note"><span aria-hidden="true">ⓘ</span> Demo records reset when the application restarts.</p>
+        </article>
+
+        <aside class="panel add-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Add a room</h2>
+              <p>Enter room capacity and occupancy</p>
+            </div>
+            <span class="add-icon" aria-hidden="true">＋</span>
+          </div>
+          <form id="room-form">
+            <label for="room-name">Room name</label>
+            <input id="room-name" name="name" placeholder="For example, D-104" maxlength="40" required>
+            <div class="form-row">
+              <div>
+                <label for="room-capacity">Bed capacity</label>
+                <input id="room-capacity" name="capacity" type="number" min="1" max="50" value="2" required>
+              </div>
+              <div>
+                <label for="room-occupied">Occupied</label>
+                <input id="room-occupied" name="occupied" type="number" min="0" max="50" value="0" required>
+              </div>
+            </div>
+            <button type="submit"><span aria-hidden="true">＋</span> Add room</button>
+            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </aside>
+      </section>
+      <footer>Hostel Management System <span>·</span> CI/CD deployment demo</footer>
+    </main>
+  </body>
+</html>

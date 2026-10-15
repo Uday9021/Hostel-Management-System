@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostel-web
+  labels:
+    app: hostel-web
+spec:
+  type: ClusterIP
+  selector:
+    app: hostel-web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5000
+      protocol: TCP

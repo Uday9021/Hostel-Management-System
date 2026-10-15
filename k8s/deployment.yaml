@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hostel-web
+  labels:
+    app: hostel-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hostel-web
+  template:
+    metadata:
+      labels:
+        app: hostel-web
+    spec:
+      containers:
+        - name: hostel-web
+          image: REPLACE_WITH_DOCKERHUB_USERNAME/hostel-cicd:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
